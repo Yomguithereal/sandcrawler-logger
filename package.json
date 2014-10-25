@@ -1,0 +1,27 @@
+{
+  "name": "sandcrawler-logger",
+  "version": "0.0.1",
+  "description": "A logger plugin for sandcrawler.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:medialab/sandcrawler-logger.git"
+  },
+  "keywords": [
+    "logging",
+    "sandcrawler-plugin"
+  ],
+  "author": "yomguithereal <kropotkinepiotr@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/medialab/sandcrawler-logger/issues"
+  },
+  "homepage": "https://github.com/medialab/sandcrawler-logger",
+  "dependencies": {
+    "winston": "~0.8.1",
+    "chalk": "~0.5.1"
+  }
+}

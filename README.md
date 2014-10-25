@@ -1,0 +1,2 @@
+# Sandcrawler logger plugin
+WIP
