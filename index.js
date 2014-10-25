@@ -23,6 +23,10 @@ function rs(string, nb) {
   return s;
 }
 
+function highlightUrl(url) {
+  return chalk.gray.bold(url);
+}
+
 /**
  * Custom Transport
  */
@@ -53,7 +57,7 @@ SandcrawlerLogger.prototype.log = function(level, msg, meta, callback) {
   // Writing text
   var txt = '';
   txt += chalk[this.scraperColor](this.scraperName);
-  txt += '/' + chalk[this.colors[level]](level);
+  txt += '/' + chalk.bold[this.colors[level]](level);
   txt += '' + rs(' ', Math.abs(level.length - 7)) + msg;
 
   // Outputting
@@ -110,13 +114,17 @@ module.exports = function(opts) {
     });
 
     // Job level listeners
+    scraper.on('job:scrape', function(job) {
+      log.info('Scraping ' + highlightUrl(job.req.url));
+    });
+
     scraper.on('job:success', function(job) {
-      log.info('Job ' + chalk.gray.bold(job.req.url) +
-               ' completed successfully.');
+      log.info('Job ' + highlightUrl(job.req.url) +
+               ' completed ' + chalk.green('successfully.'));
     });
 
     scraper.on('job:fail', function(err, job) {
-      log.warn('Job ' + chalk.gray.bold(job.req.url) +
+      log.warn('Job ' + highlightUrl(job.req.url) +
                ' failed ' + chalk.red('[Error: ' + err.message + ']'));
     });
   };
