@@ -71,7 +71,7 @@ SandcrawlerLogger.prototype.log = function(level, msg, meta, callback) {
  * Plugin
  */
 module.exports = function(opts) {
-  opts = opts || {};
+  opts = opts || {};
 
   // Bootstrap
   return function(scraper) {
