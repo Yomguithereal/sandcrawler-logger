@@ -127,5 +127,10 @@ module.exports = function(opts) {
       log.warn('Job ' + highlightUrl(job.req.url) +
                ' failed ' + chalk.red('[Error: ' + err.message + ']'));
     });
+
+    scraper.on('job:added', function(job) {
+      log.info('Job ' + highlightUrl(job.req.url) + chalk.blue(' added') +
+               ' to the stack.');
+    });
   };
 };
