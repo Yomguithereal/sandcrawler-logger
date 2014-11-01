@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:medialab/sandcrawler-logger.git"
+    "url": "git@github.com:Yomguithereal/sandcrawler-logger.git"
   },
   "keywords": [
     "logging",
@@ -17,9 +17,9 @@
   "author": "yomguithereal <kropotkinepiotr@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/medialab/sandcrawler-logger/issues"
+    "url": "https://github.com/Yomguithereal/sandcrawler-logger/issues"
   },
-  "homepage": "https://github.com/medialab/sandcrawler-logger",
+  "homepage": "https://github.com/Yomguithereal/sandcrawler-logger",
   "dependencies": {
     "winston": "~0.8.1",
     "chalk": "~0.5.1"
