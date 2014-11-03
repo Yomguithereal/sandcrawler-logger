@@ -80,6 +80,7 @@ module.exports = function(opts) {
     var log = new (winston.Logger)({
       transports: [
         new (winston.transports.SandcrawlerLogger)({
+          level: opts.level,
           scraperColor: opts.color,
           scraperName: scraper.name
         })
