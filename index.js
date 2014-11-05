@@ -58,7 +58,7 @@ SandcrawlerLogger.prototype.log = function(level, msg, meta, callback) {
   var txt = '';
   txt += chalk[this.scraperColor](this.scraperName);
   txt += '/' + chalk.bold[this.colors[level]](level);
-  txt += '' + rs(' ', Math.abs(level.length - 7)) + msg;
+  txt += '' + rs(' ', Math.abs(level.length - 8)) + msg;
 
   // Outputting
   console.log(txt);
@@ -132,6 +132,13 @@ module.exports = function(opts) {
     scraper.on('job:added', function(job) {
       log.info('Job ' + highlightUrl(job.req.url) + chalk.blue(' added') +
                ' to the stack.');
+    });
+
+    scraper.on('job:retry', function(job) {
+      var m = this.settings.maxRetries;
+
+      log.verbose('Retrying job ' + highlightUrl(job.req.url) + ' (' +
+                  job.req.retries + (m ? '/' + m : '') + ' retries)');
     });
   };
 };
