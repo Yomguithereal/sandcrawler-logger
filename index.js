@@ -37,14 +37,8 @@ var SandcrawlerLogger = winston.transports.SandcrawlerLogger = function (options
 
   // Level
   this.level = options.level || 'debug';
-<<<<<<< HEAD
-  this.scraperColor = options.scraperColor || 'magenta';
-  this.scraperName = options.scraperName;
-  this.out = options.out || console.log;
-=======
   this.spiderColor = options.spiderColor || 'magenta';
-  this.spiderName = options.spiderName;
->>>>>>> 186c66f4f0a4f23f2dc1fe6c2f97200b1dc4bea9
+  this.out = options.out || console.log;
 
   // Colors
   this.colors = {
