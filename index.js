@@ -2,7 +2,7 @@
  * Sandcrawler Logger Plugin
  * ==========================
  *
- * A simple log plugin providing a colorful output to a sandcrawler scraper
+ * A simple log plugin providing a colorful output to a sandcrawler spider
  * for debugging and monitoring purposes.
  */
 var winston = require('winston'),
@@ -37,9 +37,14 @@ var SandcrawlerLogger = winston.transports.SandcrawlerLogger = function (options
 
   // Level
   this.level = options.level || 'debug';
+<<<<<<< HEAD
   this.scraperColor = options.scraperColor || 'magenta';
   this.scraperName = options.scraperName;
   this.out = options.out || console.log;
+=======
+  this.spiderColor = options.spiderColor || 'magenta';
+  this.spiderName = options.spiderName;
+>>>>>>> 186c66f4f0a4f23f2dc1fe6c2f97200b1dc4bea9
 
   // Colors
   this.colors = {
@@ -57,9 +62,9 @@ SandcrawlerLogger.prototype.log = function(level, msg, meta, callback) {
 
   // Writing text
   var txt = '';
-  txt += chalk[this.scraperColor](this.scraperName);
+  txt += chalk[this.spiderColor](this.spiderName);
   txt += '/' + chalk.bold[this.colors[level]](level);
-  txt += '' + rs(' ', Math.abs(level.length - 7)) + msg;
+  txt += '' + rs(' ', Math.abs(level.length - 8)) + msg;
 
   // Outputting
   this.out(txt);
@@ -75,65 +80,72 @@ module.exports = function(opts) {
   opts = opts || {};
 
   // Bootstrap
-  return function(scraper) {
+  return function(spider) {
 
     // Creating logger
     var log = new (winston.Logger)({
       transports: [
         new (winston.transports.SandcrawlerLogger)({
           level: opts.level,
-          scraperColor: opts.color,
-          scraperName: scraper.name,
+          spiderColor: opts.color,
+          spiderName: spider.name,
           out: opts.out
         })
       ]
     });
 
-    // Assigning the logger to the scraper instance
+    // Assigning the logger to the spider instance
     this.logger = log;
 
-    // Scraper level listeners
-    scraper.once('scraper:start', function() {
+    // Spider level listeners
+    spider.once('spider:start', function() {
       log.info('Starting...');
     });
 
-    scraper.once('scraper:fail', function() {
-      log.error('Scraper failed.');
+    spider.once('spider:fail', function() {
+      log.error('Spider failed.');
     });
 
-    scraper.once('scraper:success', function() {
-      log.info('Scraper ended.');
+    spider.once('spider:success', function() {
+      log.info('Spider ended.');
     });
 
     // Page level listeners
-    scraper.on('page:log', function(data, req) {
+    spider.on('page:log', function(data, req) {
       log.debug('Page ' + chalk.gray.bold(req.url) +
                 ' logging: ' + chalk.cyan(data.message));
     });
 
-    scraper.on('page:error', function(data, req) {
+    spider.on('page:error', function(data, req) {
       log.debug('Page ' + chalk.gray.bold(req.url) +
                 ' error: ' + chalk.red(data.message));
     });
 
     // Job level listeners
-    scraper.on('job:scrape', function(job) {
+    spider.on('job:scrape', function(job) {
       log.info('Scraping ' + highlightUrl(job.req.url));
     });
 
-    scraper.on('job:success', function(job) {
+    spider.on('job:success', function(job) {
       log.info('Job ' + highlightUrl(job.req.url) +
                ' completed ' + chalk.green('successfully.'));
     });
 
-    scraper.on('job:fail', function(err, job) {
+    spider.on('job:fail', function(err, job) {
       log.warn('Job ' + highlightUrl(job.req.url) +
                ' failed ' + chalk.red('[Error: ' + err.message + ']'));
     });
 
-    scraper.on('job:added', function(job) {
+    spider.on('job:add', function(job) {
       log.info('Job ' + highlightUrl(job.req.url) + chalk.blue(' added') +
                ' to the stack.');
+    });
+
+    spider.on('job:retry', function(job) {
+      var m = this.settings.maxRetries;
+
+      log.verbose('Retrying job ' + highlightUrl(job.req.url) + ' (' +
+                  job.req.retries + (m ? '/' + m : '') + ' retries)');
     });
   };
 };
