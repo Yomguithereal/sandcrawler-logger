@@ -39,6 +39,7 @@ var SandcrawlerLogger = winston.transports.SandcrawlerLogger = function (options
   this.level = options.level || 'debug';
   this.scraperColor = options.scraperColor || 'magenta';
   this.scraperName = options.scraperName;
+  this.out = options.out || console.log;
 
   // Colors
   this.colors = {
@@ -61,7 +62,7 @@ SandcrawlerLogger.prototype.log = function(level, msg, meta, callback) {
   txt += '' + rs(' ', Math.abs(level.length - 7)) + msg;
 
   // Outputting
-  console.log(txt);
+  this.out(txt);
 
   // All went well...
   callback(null, true);
@@ -82,7 +83,8 @@ module.exports = function(opts) {
         new (winston.transports.SandcrawlerLogger)({
           level: opts.level,
           scraperColor: opts.color,
-          scraperName: scraper.name
+          scraperName: scraper.name,
+          out: opts.out
         })
       ]
     });
