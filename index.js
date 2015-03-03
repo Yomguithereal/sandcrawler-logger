@@ -90,7 +90,7 @@ module.exports = function(opts) {
     });
 
     // Assigning the logger to the spider instance
-    this.logger = log;
+    spider.logger = log;
 
     // Spider level listeners
     spider.once('spider:start', function() {
@@ -137,7 +137,7 @@ module.exports = function(opts) {
     });
 
     spider.on('job:retry', function(job) {
-      var m = this.settings.maxRetries;
+      var m = this.options.maxRetries;
 
       log.verbose('Retrying job ' + highlightUrl(job.req.url) + ' (' +
                   job.req.retries + (m ? '/' + m : '') + ' retries)');

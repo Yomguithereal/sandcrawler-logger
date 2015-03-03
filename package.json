@@ -1,17 +1,17 @@
 {
   "name": "sandcrawler-logger",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A logger plugin for sandcrawler.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./test/test.js"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:Yomguithereal/sandcrawler-logger.git"
   },
   "keywords": [
-    "logging",
+    "logger",
     "sandcrawler-plugin"
   ],
   "author": "yomguithereal <kropotkinepiotr@gmail.com>",
@@ -23,5 +23,9 @@
   "dependencies": {
     "winston": "~0.8.1",
     "chalk": "~0.5.1"
+  },
+  "devDependencies": {
+    "express": "^4.12.2",
+    "lodash": "^3.3.1"
   }
 }
