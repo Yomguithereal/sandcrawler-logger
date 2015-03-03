@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "express": "^4.12.2",
-    "lodash": "^3.3.1"
+    "lodash": "^3.3.1",
+    "sandcrawler": "git+https://github.com/medialab/sandcrawler.git"
   }
 }
