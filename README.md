@@ -53,10 +53,12 @@ var spider = sandcrawler.spider('MyFancySpider')
   .use(logger())
   (...)
   .result(function(err, req, res) {
-    this.logger.info('Page title: ', res.data);
+    this.logger.info('Page title: ' + res.data);
   })
   .run();
 ```
+
+Note that, under the hood, this plugin uses the [winston](https://github.com/winstonjs/winston) library, on whose documentation you can find more information about how to use the `spider.logger` property.
 
 ## License
 
