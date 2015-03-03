@@ -6,6 +6,7 @@
  * for debugging and monitoring purposes.
  */
 var winston = require('winston'),
+    defaults = require('./defaults.json'),
     util = require('util'),
     chalk = require('chalk');
 
@@ -81,8 +82,8 @@ module.exports = function(opts) {
     var log = new (winston.Logger)({
       transports: [
         new (winston.transports.SandcrawlerLogger)({
-          level: opts.level,
-          spiderColor: opts.color,
+          level: opts.level || defaults.level,
+          spiderColor: opts.color || defaults.color,
           spiderName: spider.name,
           out: opts.out
         })
