@@ -43,7 +43,7 @@ var spider = sandcrawler.spider('MyFancySpider')
 
 ## Spider's logger
 
-When plugging the logger onto your spider, this one will be attached a `logger` so you can push custom log through the means of the plugin if needed.
+When plugging the logger onto your spider, this one will be attached a `logger` property so you can push custom information through the means of the plugin if needed.
 
 ```js
 var sandcrawler = require('sandcrawler'),
