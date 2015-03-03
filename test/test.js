@@ -19,7 +19,7 @@ var app = express();
 app.use('/', express.static(__dirname));
 
 // Spider
-var spider = sandcrawler.spider('MySpider')
+var spider = sandcrawler.phantomSpider('MySpider')
   .use(logger())
   .config({concurrency: 4, autoRetry: true, maxRetries: 3})
   .beforeScraping(function(req, next) {

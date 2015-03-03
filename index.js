@@ -107,15 +107,19 @@ module.exports = function(opts) {
     });
 
     // Page level listeners
-    spider.on('page:log', function(data, req) {
-      log.debug('Page ' + chalk.gray.bold(req.url) +
-                ' logging: ' + chalk.cyan(data.message));
-    });
+    var pageLog = (opts.pageLog === false) ? false : defaults.pageLog;
 
-    spider.on('page:error', function(data, req) {
-      log.debug('Page ' + chalk.gray.bold(req.url) +
-                ' error: ' + chalk.red(data.message));
-    });
+    if (pageLog) {
+      spider.on('page:log', function(data, req) {
+        log.debug('Page ' + chalk.gray.bold(req.url) +
+                  ' logging: ' + chalk.cyan(data.message));
+      });
+
+      spider.on('page:error', function(data, req) {
+        log.debug('Page ' + chalk.gray.bold(req.url) +
+                  ' error: ' + chalk.red(data.message));
+      });
+    }
 
     // Job level listeners
     spider.on('job:scrape', function(job) {

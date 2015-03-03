@@ -1,4 +1,5 @@
 {
   "color": "magenta",
-  "level": "debug"
+  "level": "debug",
+  "pageLog": true
 }
