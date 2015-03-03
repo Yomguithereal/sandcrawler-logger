@@ -31,6 +31,14 @@ var spider = sandcrawler.spider('MyFancySpider')
 * **level** *?string* [`'debug'`]: Threshold level for the log, order being: `debug`, `verbose`, `info`, `warn` and `error`.
 * **pageLog** *?boolean* [`true`]: in case of a phantom spider, should we display the web page's log and errors?
 
+```js
+var sandcrawler = require('sandcrawler'),
+    logger = require('sandcrawler-logger');
+
+var spider = sandcrawler.spider('MyFancySpider')
+  .use(logger({color: 'blue', level: 'warn'}));
+```
+
 ## Spider's logger
 
 When plugging the logger onto your spider, this one will be attached a `logger` so you can push custom log through the means of the plugin if needed.
