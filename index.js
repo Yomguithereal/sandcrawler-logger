@@ -141,6 +141,10 @@ module.exports = function(opts) {
                ' to the stack.');
     });
 
+    spider.on('job:discard', function(err, job) {
+      log.info('Job ' + highlightUrl(job.req.url) + ' ' + chalk.yellow('discarded') + ' with error: ' + chalk.red('[Error: ' + err.message + ']'));
+    });
+
     spider.on('job:retry', function(job) {
       var m = this.options.maxRetries;
 

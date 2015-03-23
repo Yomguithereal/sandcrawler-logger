@@ -1,8 +1,8 @@
 /**
- * Sandcrawler Dashboard Test
- * ===========================
+ * Sandcrawler Logger Test
+ * ========================
  *
- * Actual dashboard test.
+ * Actual logger test.
  */
 var express = require('express'),
     sandcrawler = require('sandcrawler'),
@@ -23,7 +23,14 @@ var spider = sandcrawler.phantomSpider('MySpider')
   .use(logger())
   .config({concurrency: 4, autoRetry: true, maxRetries: 3})
   .beforeScraping(function(req, next) {
-    setTimeout(next, randInt(2, 10) * 500);
+    setTimeout(function() {
+      var n = randInt(1, 10);
+
+      if (n > 9)
+        return next(new Error('discard'));
+      else
+        return next();
+    }, randInt(2, 10) * 500);
   })
   .urls(_.range(50).map(function(i) {
     var n = randInt(1, 10);
