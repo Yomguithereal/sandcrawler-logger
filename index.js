@@ -28,6 +28,10 @@ function highlightUrl(url) {
   return chalk.gray.bold(url);
 }
 
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 /**
  * Custom Transport
  */
@@ -78,6 +82,8 @@ module.exports = function(opts) {
   // Bootstrap
   return function(spider) {
 
+    var denominator = capitalize(spider.denominator || 'spider');
+
     // Creating logger
     var log = new (winston.Logger)({
       transports: [
@@ -95,15 +101,15 @@ module.exports = function(opts) {
 
     // Spider level listeners
     spider.once('spider:start', function() {
-      log.info('Starting...');
+      log.info(denominator + ' starting...');
     });
 
     spider.once('spider:fail', function() {
-      log.error('Spider failed.');
+      log.error(denominator + ' failed.');
     });
 
     spider.once('spider:success', function() {
-      log.info('Spider ended.');
+      log.info(denominator + ' ended.');
     });
 
     // Page level listeners
