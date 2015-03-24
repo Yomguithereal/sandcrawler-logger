@@ -32,6 +32,15 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+function indent(str, color) {
+  return str
+    .split('\n')
+    .map(function(s) {
+      return ' | ' + chalk[color || 'cyan'](s);
+    })
+    .join('\n');
+}
+
 /**
  * Custom Transport
  */
@@ -118,12 +127,12 @@ module.exports = function(opts) {
     if (pageLog) {
       spider.on('page:log', function(data, req) {
         log.debug('Page ' + chalk.gray.bold(req.url) +
-                  ' logging: ' + chalk.cyan(data.message));
+                  ' logging:\n' + indent(data.message));
       });
 
       spider.on('page:error', function(data, req) {
         log.debug('Page ' + chalk.gray.bold(req.url) +
-                  ' error: ' + chalk.red(data.message));
+                  ' error:\n' + indent(data.message, 'red'));
       });
     }
 
